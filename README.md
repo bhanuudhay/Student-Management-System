@@ -32,7 +32,7 @@ Clone the repository to your local machine using the following command:
 
 bash
 
-git clone https://github.com/your-username/Student-Management-System.git
+git clone https://github.com/bhanuudhay/Student-Management-System.git
 
 
 Navigate to the project directory:
