@@ -1,6 +1,6 @@
 # Student-Management-System
-Circular Linked List: Student Management System
-This is a Student Management System implemented using a Circular Linked List in C++. The system allows users to manage a list of students, track their marks, and apply grace marks to students who have obtained fewer than 30 marks.
+Singly Linked List: Student Management System
+This is a Student Management System implemented using a Singly Linked List in C++. The system allows users to manage a list of students, track their marks, and apply grace marks to students who have obtained fewer than 30 marks.
 
 Features
 
@@ -10,7 +10,7 @@ Features
 
 3. Apply Grace Marks:  Automatically apply 5 grace marks to students with marks below 30, if grace marks haven't been given yet.
 
-4. Circular Linked List:  The students' data is managed using a circular linked list, which ensures that the list is efficiently traversed, and the last student points back to the first student.
+4. SinglyLinked List:  The students' data is managed using a Singly linked list, which ensures that the list is efficiently traversed
 
 5. Menu-Driven Interface:  Choose options from a menu to interact with the system, including adding students, displaying student data, and applying grace marks.
 
@@ -64,9 +64,8 @@ Menu Options
 
 1.  Add a Student:
 
-2.  Enter the student's name and marks. The student will be added to the circular linked list.
-Display Students:
-
+2.  Enter the student's name and marks. The student will be added to the Singly linked list.
+ 
 3. Displays the list of students, including their names, marks, and whether grace marks have been applied.
 
 4. Provide Grace Marks:
