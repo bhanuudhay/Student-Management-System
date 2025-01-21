@@ -1,131 +1,126 @@
 #include<iostream>
 using namespace std;
-
-struct Student
+class Student
 {
+    public:
     string name;
-    int marks;
-    bool graceGiven;
-    Student* next;
+    int marks ;
+    bool grace_marks;
+    Student *next;
+
+    Student(string namee , int markss)
+    {
+        name  = namee;
+        marks = markss;
+        grace_marks = false;
+        next = NULL;
+    }
 };
 
-Student* createStudent(string name, int marks)
+void insertStudent(Student *&head , string &nam , int mark)
 {
-    Student* temp = new Student();
-    temp->name = name;
-    temp->marks = marks;
-    temp->graceGiven = false;
-    temp->next = NULL;
-    return temp;
-}
+    Student *newNode = new Student(nam,mark);
 
-
-void insertStudent(Student*& head, string name, int marks)
-{
-    Student* temp = createStudent(name, marks);
-
-    if (head == NULL)
-    {
-        head = temp;
-        head->next = head;  
+    if(head == NULL){
+        head = newNode;
         return;
     }
-
-    Student* current = head;
-   
-    while (current->next != head)
-    {
-        current = current->next;
+    else{
+        newNode->next = head;
+        head=newNode;
     }
-    current->next = temp;
-    temp->next = head;  
 }
 
-
-void displayStudent(Student* head)
+void graceGiven(Student * &head)
 {
-    if (head == NULL)
+    if(head == NULL)
     {
-        cout << "STUDENT NOT FOUND" << endl;
-        return;
+        cout <<"Student not added"<<endl;
     }
-
-    Student* temp = head;
-    do
+    else
     {
-        cout << "Name: " << temp->name
-             << " Marks: " << temp->marks
-             << " Grace Given: " << (temp->graceGiven ? "Yes" : "No") << endl;
-        temp = temp->next;
-    } while (temp != head);  
-}
-
-
-void graceGiven(Student* head)
-{
-    if (head == NULL)
-    {
-        cout << "STUDENT NOT FOUND" << endl;
-        return;
-    }
-
-    Student* temp = head;
-    do
-    {
-        if (temp->marks < 30 && !temp->graceGiven)
+        Student * temp = head;
+        while(temp!=NULL)
         {
-            temp->marks += 5;  
-            temp->graceGiven = true;
-            cout << "Grace marks given to " << temp->name << endl;
+            if(temp->marks <30 && temp->grace_marks == false)
+            {
+                temp->marks +=15;
+                temp->grace_marks = true;
+                cout << " Grace marks given to  "<<temp->name<<endl;
+            }
+            temp = temp->next;
         }
-        temp = temp->next;
-    } while (temp != head);  
-}
+    }
 
+}
+void displayy(Student * head)
+{
+    if(head == NULL)
+    {
+        cout<<"Student not added"<<endl;
+    }
+    Student *temp = head;
+    while(temp!=NULL)
+    {
+        cout << endl <<"Name : "<<temp->name <<endl << "Marks : "<<temp->marks <<endl << "Grace Marks Given Status  " ;
+        if(temp->grace_marks == true ) 
+        { 
+            cout <<"YES" <<endl;
+        }
+        else
+        {
+            cout << "NO" << endl;
+        }
+        temp= temp->next;
+    }
+    cout <<endl;
+}
 int main()
 {
-    Student* head = NULL;
-    int choice;
-    string name;
+    Student * head = NULL;
     int marks;
+    string name;
 
-    do
-    {
-        cout << "\nMenu" << endl;
-        cout << "1. Add student" << endl;
-        cout << "2. Display Student" << endl;
-        cout << "3. Provide Grace Marks" << endl;
-        cout << "4. Exit" << endl;
-        cout << "Enter your choice: ";
+    cout << " MENU " <<endl;
+    cout << "1. Add student " <<endl;
+    cout << "2. Display student data"<<endl;
+    cout << "3. Provide Grace"<<endl;
+    cout << "4. Exit..."<<endl;
+
+    int choice;
+
+    do {
+        cout <<"Enter your choice  .."<<endl;
         cin >> choice;
 
-        switch (choice)
+        switch(choice)
         {
             case 1:
-                cout << "Enter student's name: ";
-                cin >> name;
-                cout << "Enter marks obtained: ";
-                cin >> marks;
-                insertStudent(head, name, marks);
-                cout << "Student added successfully!" << endl;
+                cout<<"Enter name of student  ";
+                cin >> name ;
+                cout <<"Enter marks  ";
+                cin>> marks;
+                insertStudent(head , name ,marks);
+                cout <<"Student successfully added"<<endl;
                 break;
 
             case 2:
-                displayStudent(head);
+                displayy(head);
                 break;
 
             case 3:
+                cout << " Minimum passing marks is 30 "<<endl;
+                cout<<endl;
                 graceGiven(head);
                 break;
 
             case 4:
-                cout << "Exiting the program..." << endl;
+                cout << " exiting "<<endl;
                 break;
 
-            default:
-                cout << "Invalid choice! Please try again." << endl;
+            default :
+                cout << "Not Correct Choice"<<endl;
         }
-    } while (choice != 4);
-
-    return 0;
+        
+    } while(choice != 4);  // Continue loop until choice is 4
 }
