@@ -1,0 +1,131 @@
+#include<iostream>
+using namespace std;
+
+struct Student
+{
+    string name;
+    int marks;
+    bool graceGiven;
+    Student* next;
+};
+
+Student* createStudent(string name, int marks)
+{
+    Student* temp = new Student();
+    temp->name = name;
+    temp->marks = marks;
+    temp->graceGiven = false;
+    temp->next = NULL;
+    return temp;
+}
+
+
+void insertStudent(Student*& head, string name, int marks)
+{
+    Student* temp = createStudent(name, marks);
+
+    if (head == NULL)
+    {
+        head = temp;
+        head->next = head;  
+        return;
+    }
+
+    Student* current = head;
+   
+    while (current->next != head)
+    {
+        current = current->next;
+    }
+    current->next = temp;
+    temp->next = head;  
+}
+
+
+void displayStudent(Student* head)
+{
+    if (head == NULL)
+    {
+        cout << "STUDENT NOT FOUND" << endl;
+        return;
+    }
+
+    Student* temp = head;
+    do
+    {
+        cout << "Name: " << temp->name
+             << " Marks: " << temp->marks
+             << " Grace Given: " << (temp->graceGiven ? "Yes" : "No") << endl;
+        temp = temp->next;
+    } while (temp != head);  
+}
+
+
+void graceGiven(Student* head)
+{
+    if (head == NULL)
+    {
+        cout << "STUDENT NOT FOUND" << endl;
+        return;
+    }
+
+    Student* temp = head;
+    do
+    {
+        if (temp->marks < 30 && !temp->graceGiven)
+        {
+            temp->marks += 5;  
+            temp->graceGiven = true;
+            cout << "Grace marks given to " << temp->name << endl;
+        }
+        temp = temp->next;
+    } while (temp != head);  
+}
+
+int main()
+{
+    Student* head = NULL;
+    int choice;
+    string name;
+    int marks;
+
+    do
+    {
+        cout << "\nMenu" << endl;
+        cout << "1. Add student" << endl;
+        cout << "2. Display Student" << endl;
+        cout << "3. Provide Grace Marks" << endl;
+        cout << "4. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            case 1:
+                cout << "Enter student's name: ";
+                cin >> name;
+                cout << "Enter marks obtained: ";
+                cin >> marks;
+                insertStudent(head, name, marks);
+                cout << "Student added successfully!" << endl;
+                break;
+
+            case 2:
+                displayStudent(head);
+                break;
+
+            case 3:
+                graceGiven(head);
+                break;
+
+            case 4:
+                cout << "Exiting the program..." << endl;
+                break;
+
+            default:
+                cout << "Invalid choice! Please try again." << endl;
+        }
+    } while (choice != 4);
+
+    return 0;
+}
